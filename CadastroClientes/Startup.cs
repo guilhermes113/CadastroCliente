@@ -1,4 +1,5 @@
 using CadastroClientes.Data;
+using CadastroClientes.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +36,7 @@ namespace CadastroClientes
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CadastroClientes", Version = "v1" });
             });
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MeuDb")));
+            services.AddScoped<ClienteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
