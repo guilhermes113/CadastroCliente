@@ -15,6 +15,8 @@ namespace CadastroClientes.Models
             Email = email;
         }
 
+        
+
         public int Id { get; private set; }
         [Required(ErrorMessage ="NOME É OBRIGATÓRIO!!!")]
         public string Nome { get; private set; }
@@ -26,7 +28,7 @@ namespace CadastroClientes.Models
 
         public int Idade()
         {
-            int idade = DateTime.Now.Year;
+            int idade = DateTime.Now.Year - Nascimento.Year;
             if (DateTime.Now.DayOfYear < Nascimento.DayOfYear)
                 idade--;
             return idade;
