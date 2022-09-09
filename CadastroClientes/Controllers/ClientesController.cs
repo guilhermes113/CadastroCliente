@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CadastroClientes.Data;
 using CadastroClientes.Models;
 using CadastroClientes.Repository;
+using CadastroClientes.Contracts;
 
 namespace CadastroClientes.Controllers
 {
@@ -15,17 +16,17 @@ namespace CadastroClientes.Controllers
     [ApiController]
     public class ClientesController : ControllerBase
     {
-        private readonly ClienteRepository _repository;
+        private readonly IClienteRepository _clienteRepository;
 
-        public ClientesController(ClienteRepository clienteRepository)
+        public ClientesController(IClienteRepository clienteRepository)
         {
-            _repository = clienteRepository;
+            _clienteRepository = clienteRepository;
         }
         //
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
-            return await _repository.GetClientes();
+            return Ok(await _clienteRepository.GetClientes());
         }
         //
         [HttpGet("{id}")]
@@ -33,7 +34,7 @@ namespace CadastroClientes.Controllers
         {
             
 
-            return await _repository.GetClienteById(id); ;
+            return await _clienteRepository.GetClienteById(id); ;
         }
         //
         [HttpPut("{id}")]
@@ -43,13 +44,13 @@ namespace CadastroClientes.Controllers
             //{
             //    return BadRequest();
             //}
-            return Ok(await _repository.UpdaterCliente(cliente));
+            return Ok(await _clienteRepository.UpdaterCliente(cliente));
         }
         //
         [HttpPost]
         public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
-            var NovoCliente = await _repository.AddCliente(cliente);
+            var NovoCliente = await _clienteRepository.AddCliente(cliente);
 
             return CreatedAtAction("GetCliente", new { id = NovoCliente.Id }, NovoCliente);
         }
@@ -57,7 +58,7 @@ namespace CadastroClientes.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCliente(int id)
         {
-            await _repository.DeleteCliente(id);
+            await _clienteRepository.DeleteCliente(id);
 
             return NoContent();
         }

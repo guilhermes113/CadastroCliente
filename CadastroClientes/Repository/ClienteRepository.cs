@@ -1,4 +1,5 @@
-﻿using CadastroClientes.Data;
+﻿using CadastroClientes.Contracts;
+using CadastroClientes.Data;
 using CadastroClientes.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CadastroClientes.Repository
 {
-    public class ClienteRepository
+    public class ClienteRepository : IClienteRepository
     {
         private readonly AppDbContext _context;
 

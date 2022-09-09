@@ -1,4 +1,5 @@
-﻿using CadastroClientes.Models;
+﻿using CadastroClientes.Controllers;
+using CadastroClientes.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,7 @@ namespace CadastroClienteTest
             Assert.Equal(cliente.Nascimento ,nascimento);
             Assert.Equal(cliente.Email, email);
 
+            
         }
     }
 }
